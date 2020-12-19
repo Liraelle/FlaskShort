@@ -34,6 +34,9 @@
     <Compile Include="link_model.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="link_resource.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="requirements.txt" />
