@@ -1,7 +1,7 @@
 import sqlite3
 import string
 from random import choices
-from datetime import datetime, date, timedelta
+from datetime import datetime, date
 from flask import request
 from db import db
 
@@ -10,8 +10,7 @@ class LinkModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     origin_link = db.Column(db.String(512))
     short_link = db.Column(db.String(4), unique=True)
-    created_date = db.Column(db.DateTime, default=date(2020, 4, 12))
-    #created_date = db.Column(db.DateTime, default=date.today)
+    created_date = db.Column(db.DateTime, default=date.today)
     link_expiration = db.Column(db.DateTime)
 
     def __init__(self, origin_link, link_expiration, **kwargs):
@@ -19,7 +18,7 @@ class LinkModel(db.Model):
         self.link_expiration = link_expiration
         self.short_link = self.gen_short_link()
 
-    def gen_short_link(self):   
+    def gen_short_link(self):   # generating unique short URL
         symbols = string.digits + string.ascii_letters
         short_link = ''.join(choices(symbols, k=4))
 
@@ -35,14 +34,11 @@ class LinkModel(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    @classmethod
-    def find_link(cls, short_link):
-        return cls.query.filter_by(short_link = short_link).first_or_404()
+    def delete_expired(self):   # deleting expired URL
+        db.session.delete(self)
+        db.session.commit()
 
     @classmethod
-    def delete_expired(cls, link_expiration):
-        limit = datetime.now() - timedelta(days=link_expiration)
-        cls.query.filter(LinkModel.created_date <= limit).delete()
-        db.session.commit()
-        return {'message'}
+    def find_link(cls, short_link): # searching for short URL
+        return cls.query.filter_by(short_link = short_link).first_or_404()
 
