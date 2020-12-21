@@ -37,11 +37,11 @@ After that needs to copy that short URL, paste in "Enter request URL", in "Body"
 
 In API for simpler testing inside code I changed limit from 1 million to much less. (In link_resource.py, db_limit):
 ```
-        db_limit = 1000000
+db_limit = 1000000
 ```
 
 For testing in case expired URL in database, I changing date on older (in link_resource.py, commented lines 33, 41), by commenting 32, 40 lines and uncomment 33, 41 lines:
 ```
-            #exp_date = datetime.date(2020, 7, 12) + datetime.timedelta(days=90)
-            exp_date = datetime.date.today() + datetime.timedelta(days=90)
+ #exp_date = datetime.date(2020, 7, 12) + datetime.timedelta(days=90)
+ exp_date = datetime.date.today() + datetime.timedelta(days=90)
 ```
