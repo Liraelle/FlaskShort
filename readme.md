@@ -17,8 +17,7 @@ For testing this API need to run API (using developer server, localhost). Than i
 }
 ```
 
-    in "URL" can be any URL, in "URL_expiration" can be number from 1 to 365 (days).
-    If you type:
+In "URL" can be any URL, in "URL_expiration" can be number from 1 to 365 (days). If you type:
 
 ```
 {
@@ -26,7 +25,7 @@ For testing this API need to run API (using developer server, localhost). Than i
 }
 ```
 
-    "URL_expiration" will be 90 days by default. After that press "Send". In Response window will be showing:
+"URL_expiration" will be 90 days by default. After that press "Send". In Response window will be showing:
 
 ```
 {
